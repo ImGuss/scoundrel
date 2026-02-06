@@ -77,7 +77,12 @@ header > h1 {
   cursor: pointer;
 }
 
-.weapon-container > .card {
+.battle-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.weapon > .card, .monsters > .card {
   font-size: 17rem;
   background-color: transparent;
   border: none
