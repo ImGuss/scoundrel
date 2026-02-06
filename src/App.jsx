@@ -20,6 +20,10 @@ function App() {
   const [currentHealth, setCurrentHealth] = useState(20)
   const [roomCards, setRoomCards] = useState(shuffledDeck.slice(0, 4))
 
+  // derived values
+  const currentWeaponExists =
+    Object.keys(currentWeapon).length > 0 ? true : false
+
   // functions
   function reShuffleCards() {
     const newShuffledCards = shuffleCards()
@@ -29,19 +33,21 @@ function App() {
   function removeCardFromRoom(card) {
     setRoomCards(prevRoom => prevRoom.filter(item => item.code !== card.code))
   }
-  console.log(`room cards: ${roomCards}`)
   
   function selectWeapon(card) {
     removeCardFromRoom(card)
     setCurrentWeapon(card)
+    setCurrentMonsters([])
   }
 
   function selectMonsterToFight(card) {
-    removeCardFromRoom(card)
-    setCurrentMonsters(prevMonsters => [...prevMonsters, card])
+    if (!currentWeaponExists) { return }
+    const lastFoughtMonster = currentMonsters.at(-1)
+     if (currentMonsters.length === 0 || card.value <= lastFoughtMonster.value) {
+      removeCardFromRoom(card)
+      setCurrentMonsters(prevMonsters => [...prevMonsters, card])
+    }
   }
-
-  console.log(`current monsters ${JSON.stringify(currentMonsters)}`)
 
   function selectPotion(card) {
     removeCardFromRoom(card)
@@ -77,9 +83,8 @@ function App() {
 
   const currentMonsterElements = currentMonsters.map(card => {
     return (
-      <div className="monsters">
+      <div key={card.code} className="monsters">
         <Card
-          key={card.code}
           rank={card.rank}
           suit={card.suit}
           value={card.value}
@@ -114,7 +119,7 @@ function App() {
           </div>
         </section>
         <section className="battle-container">
-          {Object.keys(currentWeapon).length > 0  ?
+          {currentWeaponExists ?
             <div className="weapon">
               <Card
                 rank={currentWeapon.rank}
