@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 // assets
@@ -20,9 +20,22 @@ function App() {
   const [currentHealth, setCurrentHealth] = useState(20)
   const [roomCards, setRoomCards] = useState(shuffledDeck.slice(0, 4))
 
+  useEffect(() => {
+    // remove four cards from the deck on first render
+    const prevDeck = shuffledDeck
+    console.log(prevDeck)
+    setShuffledDeck(prevDeck.slice(4))
+  }, [])
+
   // derived values
-  const currentWeaponExists =
-    Object.keys(currentWeapon).length > 0 ? true : false
+  const currentWeaponExists = Object.keys(currentWeapon).length > 0 ? true : false
+  const isGameLost = currentHealth <= 0 ? true : false
+
+  if (roomCards.length === 1) {
+    const threeNextCards = shuffledDeck.slice(0, 3)
+    setRoomCards(prevCard => [...prevCard, ...threeNextCards])
+    setShuffledDeck(prevDeck => prevDeck.slice(3))
+  }
 
   // functions
   function reShuffleCards() {
@@ -40,12 +53,28 @@ function App() {
     setCurrentMonsters([])
   }
 
+  function dealDamage(value) {
+    setCurrentHealth(prevHealth => prevHealth - value)
+  }
+
   function selectMonsterToFight(card) {
-    if (!currentWeaponExists) { return }
+    if (!currentWeaponExists) {
+      dealDamage(card.value)
+      removeCardFromRoom(card)
+      return
+    }
     const lastFoughtMonster = currentMonsters.at(-1)
      if (currentMonsters.length === 0 || card.value <= lastFoughtMonster.value) {
+      const damageDone =
+        card.value - currentWeapon.value <= 0 ?
+        0 :
+        card.value - currentWeapon.value
+      dealDamage(damageDone)
       removeCardFromRoom(card)
       setCurrentMonsters(prevMonsters => [...prevMonsters, card])
+    } else {
+      dealDamage(card.value)
+      removeCardFromRoom(card)
     }
   }
 
@@ -101,10 +130,6 @@ function App() {
     console.log(card)
   }
 
-  // writing this down so i don't forget. might update state to remove the cards
-  // that are discarded by doing a setShuffledDeck(prevDeck => prevDeck.slice(4))
-  // or something like that. have to test
-
   return (
     <>
       <Header />
@@ -116,6 +141,9 @@ function App() {
 
           <div className="room">
             {currentRoomElements}
+          </div>
+          <div className="health">
+            <h1>❤️ {currentHealth < 0 ? 0 : currentHealth}</h1>
           </div>
         </section>
         <section className="battle-container">
