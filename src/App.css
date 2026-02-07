@@ -34,58 +34,13 @@ header > h1 {
   cursor: pointer;
 }
 
-.game-container {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
-
-.dungeon-container {
-  display: flex;
-  margin: auto;
-  max-width: 900px;
-  justify-content: center;
-  align-items: center;
-}
-
-.dungeon > .card-back {
-  font-size: 30rem;
-  color: #F9F4DA;
+.card {
+  font-size: 15rem;
   line-height: 1;
   margin: 0;
   padding: 0;
   border: none;
   background-color: transparent;
-  cursor: pointer;
-}
-
-.room {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  align-items: center;
-  justify-content: center;
-}
-
-.room > .card {
-  font-size: 14.25rem;
-  line-height: 1;
-  margin: 0 5px;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.battle-container {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-}
-
-.weapon > .card, .monsters > .card {
-  font-size: 17rem;
-  background-color: transparent;
-  border: none
 }
 
 .red {
@@ -95,6 +50,59 @@ header > h1 {
 .blue {
   color: #0000CC;
 }
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+/* dungeon */
+.dungeon-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards-left {
+  grid-column: 1 / 6;
+  align-self: start;
+}
+
+.health {
+  grid-column: 6;
+}
+
+.card-back {
+  cursor: pointer;
+  color: #F9F4DA;
+  margin: auto 10px;
+}
+
+.discard {
+  grid-column: 6;
+}
+
+.dungeon-container > .card {
+  cursor: pointer;
+}
+/* end dungeon */
+
+/* battle */
+.battle-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: auto;
+  align-items: center;
+}
+
+.run-button {
+  grid-column: 6;
+
+}
+/* end battle */
 
 
 /* might use this for cards */
