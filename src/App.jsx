@@ -19,13 +19,16 @@ function App() {
   const [currentMonsters, setCurrentMonsters] = useState([])
   const [currentHealth, setCurrentHealth] = useState(20)
   const [roomCards, setRoomCards] = useState(shuffledDeck.slice(0, 4))
+  const [canRun, setCanRun] = useState(true)
+  const [canHeal, setCanHeal] = useState(true)
+
 
   useEffect(() => {
     // remove four cards from the deck on first render
     const prevDeck = shuffledDeck
-    console.log(prevDeck)
     setShuffledDeck(prevDeck.slice(4))
   }, [])
+
 
   // derived values
   const currentWeaponExists = Object.keys(currentWeapon).length > 0 ? true : false
@@ -35,7 +38,10 @@ function App() {
     const threeNextCards = shuffledDeck.slice(0, 3)
     setRoomCards(prevCard => [...prevCard, ...threeNextCards])
     setShuffledDeck(prevDeck => prevDeck.slice(3))
+    setCanRun(true)
+    setCanHeal(true)
   }
+
 
   // functions
   function reShuffleCards() {
@@ -79,15 +85,30 @@ function App() {
   }
 
   function selectPotion(card) {
+    if (!canHeal) {
+      removeCardFromRoom(card)
+      return
+    }
     removeCardFromRoom(card)
     setCurrentHealth(prevHealth => (
       prevHealth + card.value > 20 ? 20 : prevHealth + card.value
     ))
+    setCanHeal(false)
   }
+
+  function runFromRoom() {
+    setCanRun(false)
+    const newRoom = shuffledDeck.slice(0, 4)
+    const prevDeck = shuffledDeck.slice(4)
+    setShuffledDeck(() => [...prevDeck, ...roomCards])
+    setRoomCards(newRoom)
+  }
+
 
   // elements
   const currentRoomElements = roomCards.map(card => {
     function handleClick(clickedCard) {
+      setCanRun(false)
       if (clickedCard.suit === "Spades" || clickedCard.suit === "Clubs") {
         selectMonsterToFight(clickedCard)
       } else if (clickedCard.suit === "Hearts") {
@@ -126,9 +147,7 @@ function App() {
   })
 
 
-  function logCurrentValue(card) {
-    console.log(card)
-  }
+  console.log(shuffledDeck)
 
   return (
     <>
@@ -162,6 +181,7 @@ function App() {
               currentMonsterElements : null
           }
         </section>
+          {canRun ? <button onClick={runFromRoom}>Run</button> : null}
       </div>
     </>
   )
