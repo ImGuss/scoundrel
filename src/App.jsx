@@ -71,17 +71,22 @@ function App() {
     }
     const lastFoughtMonster = currentMonsters.at(-1)
      if (currentMonsters.length === 0 || card.value <= lastFoughtMonster.value) {
-      const damageDone =
-        card.value - currentWeapon.value <= 0 ?
-        0 :
-        card.value - currentWeapon.value
+      const damageDone = card.value - currentWeapon.value <= 0 ?
+        0 : card.value - currentWeapon.value
       dealDamage(damageDone)
       removeCardFromRoom(card)
-      setCurrentMonsters(prevMonsters => [...prevMonsters, card])
+      setCurrentMonsters(prevMonsters => {
+        if (prevMonsters.length === 4) {
+          return [...prevMonsters.slice(1), card]
+        } else {
+          return [...prevMonsters, card]
+        }
+      })
     } else {
       dealDamage(card.value)
       removeCardFromRoom(card)
     }
+
   }
 
   function selectPotion(card) {
@@ -146,25 +151,34 @@ function App() {
     )
   })
 
-
-  console.log(shuffledDeck)
-
   return (
     <>
       <Header />
       <div className="game-container">
-        <section className="dungeon-container">
-          <div className="dungeon">
-            <button onClick={reShuffleCards} className="card-back">{cardBack}</button>
-          </div>
 
-          <div className="room">
-            {currentRoomElements}
-          </div>
+
+
+        <section className="dungeon-container">
+          <div className="cards-left">
+            <h1>Cards Left: {shuffledDeck.length}</h1>
+            </div>
           <div className="health">
             <h1>❤️ {currentHealth < 0 ? 0 : currentHealth}</h1>
           </div>
+          {/* <div className="dungeon"> */}
+            <button onClick={null} className="card card-back">{cardBack}</button>
+          {/* </div> */}
+
+          {/* <div className="room"> */}
+            {currentRoomElements}
+          {/* </div> */}
+          <button onClick={null} className=" card card-back discard">{cardBack}</button>
         </section>
+
+
+
+
+
         <section className="battle-container">
           {currentWeaponExists ?
             <div className="weapon">
@@ -180,8 +194,14 @@ function App() {
           {currentMonsters.length > 0 ?
               currentMonsterElements : null
           }
+          <button 
+            className="run-button"
+            disabled={canRun ? false : true}
+            onClick={runFromRoom}
+          >
+            Run
+          </button>
         </section>
-          {canRun ? <button onClick={runFromRoom}>Run</button> : null}
       </div>
     </>
   )
