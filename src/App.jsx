@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import './App.css'
 
 // assets
@@ -10,6 +10,7 @@ import { shuffleCards } from './utils'
 // components
 import Header from './components/Header'
 import Card from './components/Card'
+import Modal from './components/Modal'
 
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
   const [roomCards, setRoomCards] = useState(shuffledDeck.slice(0, 4))
   const [canRun, setCanRun] = useState(true)
   const [canHeal, setCanHeal] = useState(true)
+  const [modalBody, setModalBody] = useState(null)
+
+  // refs
+  const dialogRef = useRef(null)
 
 
   useEffect(() => {
@@ -151,12 +156,20 @@ function App() {
     )
   })
 
+  function toggleModal(body) {
+    setModalBody(body)
+    dialogRef.current.showModal()
+  }
+
   return (
     <>
-      <Header />
+      <Header
+        toggleModal={toggleModal}
+      />
+      <Modal dialogRef={dialogRef}>
+        {modalBody}
+      </Modal>
       <div className="game-container">
-
-
 
         <section className="dungeon-container">
           <div className="cards-left">
@@ -174,10 +187,6 @@ function App() {
           {/* </div> */}
           <button onClick={null} className=" card card-back discard">{cardBack}</button>
         </section>
-
-
-
-
 
         <section className="battle-container">
           {currentWeaponExists ?

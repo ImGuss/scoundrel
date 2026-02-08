@@ -30,9 +30,13 @@ header > h1 {
   grid-column: 3 / 4;
 }
 
-.navbar > h1 {
+.navbar > button {
+  color: #F9F4DA;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
+
 
 .card {
   font-size: 15rem;
@@ -90,6 +94,7 @@ header > h1 {
 }
 /* end dungeon */
 
+
 /* battle */
 .battle-container {
   display: grid;
@@ -100,9 +105,29 @@ header > h1 {
 
 .run-button {
   grid-column: 6;
-
 }
 /* end battle */
+
+
+/* modal */
+.modal {
+  padding: 50px;
+  background-color: #272727;
+  border-radius: 5px;
+  border: none;
+  color: #F9F4DA;
+  /* height: 80vh; */
+  width: 50vw;
+}
+
+.rules > h1 {
+  margin-top: 0;
+}
+
+.rules > p > span {
+  font-weight: bold;
+}
+/* end modal */
 
 
 /* might use this for cards */
