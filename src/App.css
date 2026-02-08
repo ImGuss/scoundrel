@@ -116,7 +116,9 @@ header > h1 {
   border-radius: 5px;
   border: none;
   color: #F9F4DA;
-  /* height: 80vh; */
+}
+
+.rules {
   width: 50vw;
 }
 

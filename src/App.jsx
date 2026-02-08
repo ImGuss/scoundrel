@@ -68,10 +68,25 @@ function App() {
     setCurrentHealth(prevHealth => prevHealth - value)
   }
 
+  function fightWithFists(card) {
+    dealDamage(card.value)
+    removeCardFromRoom(card)
+    dialogRef.current.close()
+  }
+
+  function fistsOrWeapon(card) {
+    const body = (
+      <div>
+        <button onClick={() => fightWithFists(card)}>Fists</button>
+        <button onClick={() => selectMonsterToFight(card)}>Weapon</button>
+      </div>
+    )
+    toggleModal(body)
+  }
+
   function selectMonsterToFight(card) {
     if (!currentWeaponExists) {
-      dealDamage(card.value)
-      removeCardFromRoom(card)
+      fightWithFists(card)
       return
     }
     const lastFoughtMonster = currentMonsters.at(-1)
@@ -91,7 +106,7 @@ function App() {
       dealDamage(card.value)
       removeCardFromRoom(card)
     }
-
+    dialogRef.current.close()
   }
 
   function selectPotion(card) {
@@ -114,13 +129,19 @@ function App() {
     setRoomCards(newRoom)
   }
 
+  function toggleModal(body) {
+    setModalBody(body)
+    dialogRef.current.showModal()
+  }
+
 
   // elements
   const currentRoomElements = roomCards.map(card => {
     function handleClick(clickedCard) {
       setCanRun(false)
       if (clickedCard.suit === "Spades" || clickedCard.suit === "Clubs") {
-        selectMonsterToFight(clickedCard)
+        // selectMonsterToFight(clickedCard)
+        fistsOrWeapon(clickedCard)
       } else if (clickedCard.suit === "Hearts") {
         selectPotion(clickedCard)
       }
@@ -155,11 +176,6 @@ function App() {
       </div>
     )
   })
-
-  function toggleModal(body) {
-    setModalBody(body)
-    dialogRef.current.showModal()
-  }
 
   return (
     <>
