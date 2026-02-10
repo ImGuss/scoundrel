@@ -62,6 +62,7 @@ function App() {
     removeCardFromRoom(card)
     setCurrentWeapon(card)
     setCurrentMonsters([])
+    setCanRun(false)
   }
 
   function dealDamage(value) {
@@ -71,47 +72,50 @@ function App() {
   function fightWithFists(card) {
     dealDamage(card.value)
     removeCardFromRoom(card)
+    setCanRun(false)
+    dialogRef.current.close()
+  }
+
+  function fightWithWeapon(card) {
+    const damageDone = card.value - currentWeapon.value <= 0 ?
+      0 : card.value - currentWeapon.value
+    dealDamage(damageDone)
+    removeCardFromRoom(card)
+    setCurrentMonsters(prevMonsters => {
+      if (prevMonsters.length === 4) {
+        return [...prevMonsters.slice(1), card]
+      } else {
+        return [...prevMonsters, card]
+      }
+    })
+    setCanRun(false)
     dialogRef.current.close()
   }
 
   function fistsOrWeapon(card) {
     const body = (
-      <div>
-        <button onClick={() => fightWithFists(card)}>Fists</button>
-        <button onClick={() => selectMonsterToFight(card)}>Weapon</button>
+      <div className="weapon-or-fists">
+        <button className="weapon-button" onClick={() => fightWithWeapon(card)}>Weapon</button>
+        <button className="fists-button" onClick={() => fightWithFists(card)}>Fists</button>
       </div>
     )
     toggleModal(body)
   }
 
   function selectMonsterToFight(card) {
-    if (!currentWeaponExists) {
-      fightWithFists(card)
-      return
-    }
     const lastFoughtMonster = currentMonsters.at(-1)
-     if (currentMonsters.length === 0 || card.value <= lastFoughtMonster.value) {
-      const damageDone = card.value - currentWeapon.value <= 0 ?
-        0 : card.value - currentWeapon.value
-      dealDamage(damageDone)
-      removeCardFromRoom(card)
-      setCurrentMonsters(prevMonsters => {
-        if (prevMonsters.length === 4) {
-          return [...prevMonsters.slice(1), card]
-        } else {
-          return [...prevMonsters, card]
-        }
-      })
+    if (!currentWeaponExists || lastFoughtMonster?.value <= card.value) {
+      fightWithFists(card)
+      setCanRun(false)
     } else {
-      dealDamage(card.value)
-      removeCardFromRoom(card)
+      fistsOrWeapon(card)
     }
-    dialogRef.current.close()
   }
 
   function selectPotion(card) {
     if (!canHeal) {
       removeCardFromRoom(card)
+      setCanRun(false)
       return
     }
     removeCardFromRoom(card)
@@ -119,6 +123,7 @@ function App() {
       prevHealth + card.value > 20 ? 20 : prevHealth + card.value
     ))
     setCanHeal(false)
+    setCanRun(false)
   }
 
   function runFromRoom() {
@@ -138,10 +143,9 @@ function App() {
   // elements
   const currentRoomElements = roomCards.map(card => {
     function handleClick(clickedCard) {
-      setCanRun(false)
       if (clickedCard.suit === "Spades" || clickedCard.suit === "Clubs") {
-        // selectMonsterToFight(clickedCard)
-        fistsOrWeapon(clickedCard)
+        selectMonsterToFight(clickedCard)
+        // fistsOrWeapon(clickedCard)
       } else if (clickedCard.suit === "Hearts") {
         selectPotion(clickedCard)
       }
