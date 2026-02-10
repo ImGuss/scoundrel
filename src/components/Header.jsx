@@ -14,6 +14,10 @@ export default function Header(props) {
       <p>The 9 <span className="red">Hearts ♥</span> in the deck are <span>Health Potions</span>. You may only use one health potion each turn, even if you pull two. The second potion you pull is simply discarded. You may not restore your life beyond your starting 20 health.</p>
 
       <p>The Game ends when either your life reaches 0 or you make your way through the entire Dungeon.</p>
+
+      <p>For more information, please see the full rules <a target="_blank" href="http://stfj.net/art/2011/Scoundrel.pdf">here</a>.</p>
+
+      <p>Created by Zach Gage and Kurt Bieg</p>
     </div>
   )
 
