@@ -105,20 +105,32 @@ header > h1 {
 
 .run-button {
   grid-column: 6;
+  max-width: 60px;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: blue;
+  border: none;
+  border-radius: 2px;
+}
+
+.run-button:disabled {
+  cursor: not-allowed;
+  background-color: #CC0000;
+  color: #F9F4DA;
 }
 /* end battle */
 
 
 /* modal */
 .modal {
-  padding: 50px;
   background-color: #272727;
-  border-radius: 5px;
+  border-radius: 7px;
   border: none;
   color: #F9F4DA;
 }
 
 .rules {
+  margin: 50px;
   width: 50vw;
 }
 
@@ -128,6 +140,26 @@ header > h1 {
 
 .rules > p > span {
   font-weight: bold;
+}
+
+.weapon-or-fists {
+  margin: 0.5rem;
+}
+
+.weapon-or-fists > button {
+  border: none;
+  border-radius: 2px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.weapon-button {
+  background-color: aquamarine;
+}
+
+.fists-button {
+  background-color: firebrick;
+  margin-left: 1.2rem;
 }
 /* end modal */
 
