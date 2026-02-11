@@ -18,7 +18,7 @@ function App() {
   const [shuffledDeck, setShuffledDeck] = useState(() => shuffleCards())
   const [currentWeapon, setCurrentWeapon] = useState({})
   const [currentMonsters, setCurrentMonsters] = useState([])
-  const [currentHealth, setCurrentHealth] = useState(5)
+  const [currentHealth, setCurrentHealth] = useState(20)
   const [roomCards, setRoomCards] = useState([])
   const [canRun, setCanRun] = useState(true)
   const [canHeal, setCanHeal] = useState(true)
@@ -77,7 +77,7 @@ function App() {
 
   console.log(`deck empty? ${deckIsEmpty}`)
 
-  
+
   // functions
   function removeCardFromRoom(card) {
     setRoomCards(prevRoom => prevRoom.filter(item => item.code !== card.code))
