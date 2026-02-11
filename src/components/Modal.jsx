@@ -5,7 +5,12 @@ export default function Modal(props) {
 
   return (
     <dialog ref={dialogRef} className="modal">
-      {children}
+      <div className="modal-children">
+        {children}
+      </div>
+      <button onClick={() => dialogRef.current.close()} className="x-button">
+        x
+      </button>
     </dialog>
   )
 }
