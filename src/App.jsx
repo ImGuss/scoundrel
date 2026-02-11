@@ -18,10 +18,11 @@ function App() {
   const [shuffledDeck, setShuffledDeck] = useState(() => shuffleCards())
   const [currentWeapon, setCurrentWeapon] = useState({})
   const [currentMonsters, setCurrentMonsters] = useState([])
-  const [currentHealth, setCurrentHealth] = useState(20)
-  const [roomCards, setRoomCards] = useState(shuffledDeck.slice(0, 4))
+  const [currentHealth, setCurrentHealth] = useState(5)
+  const [roomCards, setRoomCards] = useState([])
   const [canRun, setCanRun] = useState(true)
   const [canHeal, setCanHeal] = useState(true)
+  const [resetGame, setResetGame] = useState(false)
   const [modalBody, setModalBody] = useState(null)
 
   // refs
@@ -29,17 +30,27 @@ function App() {
 
 
   useEffect(() => {
-    // remove four cards from the deck on first render
+    // draw 4 cards on first render and when game is reset
     const prevDeck = shuffledDeck
+    setRoomCards(prevDeck.slice(0, 4))
     setShuffledDeck(prevDeck.slice(4))
-  }, [])
+  }, [resetGame])
 
 
   // derived values
   const currentWeaponExists = Object.keys(currentWeapon).length > 0 ? true : false
-  const isGameLost = currentHealth <= 0 ? true : false
+  const deckIsEmpty = shuffledDeck.length === 0 ? true : false
+  const roomIsEmpty = roomCards.length === 0 ? true : false
+  const gameIsLost = currentHealth <= 0 ? true : false
+  const gameIsWon =
+    !gameIsLost && deckIsEmpty && roomIsEmpty ||
+    !gameIsLost && deckIsEmpty && roomCards.every(card => card.suit === "Hearts") ?
+    true : false
 
-  if (roomCards.length === 1) {
+
+  if (canRun && deckIsEmpty) setCanRun(false)
+
+  if (!deckIsEmpty && roomCards.length === 1) {
     const threeNextCards = shuffledDeck.slice(0, 3)
     setRoomCards(prevCard => [...prevCard, ...threeNextCards])
     setShuffledDeck(prevDeck => prevDeck.slice(3))
@@ -48,12 +59,26 @@ function App() {
   }
 
 
-  // functions
-  function reShuffleCards() {
-    const newShuffledCards = shuffleCards()
-    setShuffledDeck(newShuffledCards)
-  }
+  useEffect(() => {
+    // renders modal if game is won or lost
+    const gameOverBody = gameIsWon ? (
+      <div>
+        <h1>Congrats! You've won!</h1>
+        <button onClick={playAgain}>Play again</button>
+      </div> 
+    ) : (
+      <div>
+        <h1>Sorry! Try again!</h1>
+        <button onClick={playAgain}>Play again</button>
+      </div>
+    )
+    if (gameIsWon || gameIsLost) toggleModal(gameOverBody)
+  }, [gameIsWon, gameIsLost])
 
+  console.log(`deck empty? ${deckIsEmpty}`)
+
+  
+  // functions
   function removeCardFromRoom(card) {
     setRoomCards(prevRoom => prevRoom.filter(item => item.code !== card.code))
   }
@@ -137,6 +162,18 @@ function App() {
   function toggleModal(body) {
     setModalBody(body)
     dialogRef.current.showModal()
+  }
+
+  function playAgain() {
+    setCurrentWeapon({})
+    setRoomCards([])
+    setCurrentMonsters([])
+    setCurrentHealth(20)
+    setCanRun(true)
+    setCanHeal(true)
+    setShuffledDeck(shuffleCards())
+    setResetGame(prevResetGame => !prevResetGame)
+    dialogRef.current.close()
   }
 
 
