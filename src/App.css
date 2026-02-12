@@ -7,6 +7,8 @@ body {
   color: #F9F4DA;
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
+  /* background-image: url('/images/brick-wall.jpg');
+  background-size: 250%; */
 }
 
 header {
@@ -132,14 +134,15 @@ header > h1 {
 
 .x-button {
   position: absolute;
-  top: -5px;
-  right: 0;
+  top: 1%;
+  right: 2%;
   background-color: transparent;
   border: none;
   font-size: 1.15rem;
   cursor: pointer;
   color: #F9F4DA;
   font-weight: 200;
+  font-weight: 400;
 }
 
 .rules {

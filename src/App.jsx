@@ -60,22 +60,40 @@ function App() {
 
 
   useEffect(() => {
-    // renders modal if game is won or lost
+    // calculates score and renders modal if game is won or lost
+    let deckMonsterHP = 0
+    let totalPotion = 0
+    shuffledDeck.forEach(card => {
+      if (card.type === "monster") {
+        deckMonsterHP+= card.value
+      }
+    })
+    roomCards.forEach(card => {
+      if (card.type === "monster") {
+        deckMonsterHP+= card.value
+      }
+    })
+
+    if (currentHealth === 20 && gameIsWon) {
+      roomCards.forEach(card => {
+        if (card.type === "potion")
+          totalPotion += card.value
+      })
+    }
+    const score = currentHealth - deckMonsterHP + totalPotion
     const gameOverBody = gameIsWon ? (
       <div>
-        <h1>Congrats! You've won!</h1>
+        <h1>Congrats! You've won! Your score is {score}</h1>
         <button onClick={playAgain}>Play again</button>
       </div> 
     ) : (
       <div>
-        <h1>Sorry! Try again!</h1>
+        <h1>Sorry! Try again! Your score was {score}</h1>
         <button onClick={playAgain}>Play again</button>
       </div>
     )
     if (gameIsWon || gameIsLost) toggleModal(gameOverBody)
   }, [gameIsWon, gameIsLost])
-
-  console.log(`deck empty? ${deckIsEmpty}`)
 
 
   // functions
@@ -230,18 +248,14 @@ function App() {
 
         <section className="dungeon-container">
           <div className="cards-left">
-            <h1>Cards Left: {shuffledDeck.length}</h1>
+            <h1 aria-label="Cards left in deck">Cards Left: {shuffledDeck.length}</h1>
             </div>
           <div className="health">
             <h1>❤️ {currentHealth < 0 ? 0 : currentHealth}</h1>
           </div>
-          {/* <div className="dungeon"> */}
             <button onClick={null} className="card card-back">{cardBack}</button>
-          {/* </div> */}
 
-          {/* <div className="room"> */}
             {currentRoomElements}
-          {/* </div> */}
           <button onClick={null} className=" card card-back discard">{cardBack}</button>
         </section>
 
@@ -263,6 +277,7 @@ function App() {
           <button 
             className="run-button"
             disabled={canRun ? false : true}
+            aria-disabled={canRun ? false : true}
             onClick={runFromRoom}
           >
             Run

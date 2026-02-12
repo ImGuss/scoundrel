@@ -11,7 +11,7 @@ export default function Card(props) {
 
   return (
     <button
-      aria-live={`${rank} of ${suit}`}
+      aria-label={`${rank} of ${suit}`}
       className={classes}
       onClick={() => handleClick(card)}
     >
