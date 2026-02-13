@@ -254,10 +254,10 @@ function App() {
           <div className="health">
             <h1>❤️ {currentHealth < 0 ? 0 : currentHealth}</h1>
           </div>
-            <button onClick={null} className="card card-back">{cardBack}</button>
+            <div className="card-back">SCOUNDREL</div>
 
             {currentRoomElements}
-          <button onClick={null} className=" card card-back discard">{cardBack}</button>
+          <div className="card-back discard">SCOUNDREL</div>
         </section>
 
         <section className="battle-container">

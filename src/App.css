@@ -5,7 +5,7 @@
 body {
   background-color: #121212;
   color: #F9F4DA;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Cinzel Decorative", serif;
   margin: 0;
   /* background-image: url('/images/brick-wall.jpg');
   background-size: 250%; */
@@ -40,15 +40,6 @@ header > h1 {
 }
 
 
-.card {
-  font-size: 15rem;
-  line-height: 1;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-}
-
 .red {
   color: #A22E16;
 }
@@ -63,13 +54,16 @@ header > h1 {
   align-content: center;
 }
 
+
 /* dungeon */
 .dungeon-container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr;
   margin: auto;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
+  gap: 10px;
 }
 
 .cards-left {
@@ -81,20 +75,92 @@ header > h1 {
   grid-column: 6;
 }
 
-.card-back {
-  cursor: pointer;
-  color: #F9F4DA;
-  margin: auto 10px;
-}
 
 .discard {
   grid-column: 6;
 }
+/* end dungeon */
 
-.dungeon-container > .card {
+
+/* card */
+.card-button {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
 }
-/* end dungeon */
+
+.card {
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-areas:
+    'value . .'
+    'img img img'
+    '. . down'
+  ;
+  background-image: url('/images/paper-background.jpg');
+  font-family: "Cinzel Decorative", serif;
+  font-weight: 600;
+  color: #2C2C2C;
+  border-radius: 5px;
+}
+
+.value {
+  grid-area: value;
+}
+
+.name {
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+  justify-self: center;
+}
+
+.card-img {
+  width: 150px;
+  height: 200px;
+  grid-area: img;
+  justify-self: center;
+  border-radius: 3px;
+  object-fit: cover;
+  object-position: 65% center;
+}
+
+.card-class {
+  grid-column: 1 / -1;
+  grid-row: 2 / 3;
+  background-image: url('/images/black-paper.jpg');
+  color: #F9F4DA;
+  align-self: end;
+  border-radius: 0 0 3px 3px;
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 2px;
+}
+
+.card-type {
+  grid-column: 1 / -1;
+  grid-row: 3 / 4;
+  justify-self: center;
+}
+
+.upside-down-value {
+  grid-area: down;
+  transform: rotate(180deg);
+}
+
+.card-back {
+  background-image: url('/images/paper-background.jpg');
+  color: #2C2C2C;
+  font-family: "Cinzel Decorative", serif;
+  font-weight: 700;
+  align-content: center;
+  text-align: center;
+  border-radius: 5px;
+}
+/* end card */
+
 
 
 /* battle */
@@ -121,6 +187,11 @@ header > h1 {
   color: #F9F4DA;
 }
 /* end battle */
+
+
+
+
+
 
 
 /* modal */
@@ -178,82 +249,3 @@ header > h1 {
   margin-left: 1.2rem;
 }
 /* end modal */
-
-
-
-.test-card-button {
-  display: flex;
-  justify-content: center;
-  margin: 50px auto;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-
-
-.test-card {
-  /* width: 200px; */
-  padding: 0.5rem;
-  display: inline-grid;
-  grid-template-columns: 1fr 5fr 1fr;
-  grid-template-areas:
-    'value . .'
-    'img img img'
-    '. . down'
-  ;
-
-  background-image: url('/images/paper-background.jpg');
-
-  font-family: "Cinzel Decorative", serif;
-  font-weight: 600;
-  color: #2C2C2C;
-
-  border-radius: 5px;
-}
-
-.test-value {
-  grid-area: value;
-}
-
-.test-name {
-  grid-column: 1 / -1;
-  grid-row: 1 / 2;
-  justify-self: center;
-}
-
-.test-img {
-  width: 150px;
-  height: 200px;
-  grid-area: img;
-  justify-self: center;
-  border-radius: 3px;
-  object-fit: cover;
-  object-position: 65% center;
-}
-
-.test-card-class {
-  grid-column: 1 / -1;
-  grid-row: 2 / 3;
-  background-image: url('/images/black-paper.jpg');
-  color: #F9F4DA;
-  align-self: end;
-  border-radius: 0 0 3px 3px;
-  text-align: center;
-  font-size: 0.8rem;
-  padding: 2px;
-}
-
-.test-type {
-  grid-column: 1 / -1;
-  grid-row: 3 / 4;
-  justify-self: center;
-}
-
-.test-upside-down-value {
-  grid-area: down;
-  transform: rotate(180deg);
-}
-
-
-
