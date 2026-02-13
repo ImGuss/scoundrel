@@ -200,7 +200,6 @@ function App() {
     function handleClick(clickedCard) {
       if (clickedCard.suit === "Spades" || clickedCard.suit === "Clubs") {
         selectMonsterToFight(clickedCard)
-        // fistsOrWeapon(clickedCard)
       } else if (clickedCard.suit === "Hearts") {
         selectPotion(clickedCard)
       }
@@ -215,6 +214,7 @@ function App() {
         suit={card.suit}
         value={card.value}
         image={card.image}
+        type={card.type}
         card={card}
         handleClick={handleClick}
       />
@@ -229,6 +229,7 @@ function App() {
           suit={card.suit}
           value={card.value}
           image={card.image}
+          type={card.type}
           card={card}
           handleClick={null}
         />
@@ -267,6 +268,7 @@ function App() {
                 suit={currentWeapon.suit}
                 value={currentWeapon.value}
                 image={currentWeapon.image}
+                type={currentWeapon.type}
                 handleClick={null}
               />
             </div> : null
@@ -284,6 +286,19 @@ function App() {
           </button>
         </section>
       </div>
+
+      {/* <button className="test-card-button">
+        <div className="test-card">
+          <span className="test-value">6</span>
+          <div className="test-name">Monster</div>
+          <div className="test-spade-1"></div>
+          <img className="test-img" src="/images/werewolf.jpg" alt="6 of spades" />
+          <div className="test-card-class">Werewolf</div>
+          <div className="test-spade-2"></div>
+          <div className="test-type">Attack</div>
+          <div className="test-upside-down-value">6</div>
+        </div>
+      </button> */}
     </>
   )
 }
