@@ -3,7 +3,7 @@ export default function Header(props) {
 
   const rules = (
     <div className="rules">
-      <h1>Rules:</h1>
+      <span>Rules:</span>
 
       <p>Scoundrel is played with a standard deck of playing cards. All of the red face cards and red aces are removed, along with jokers</p>
 
@@ -22,7 +22,7 @@ export default function Header(props) {
   )
 
   const settings = (
-    <h1>Settings</h1>
+    <span className="settings">Settings</span>
   )
 
   return (

@@ -88,12 +88,12 @@ console.log(totalCardsLeft)
     const score = currentHealth - deckMonsterHP + totalPotion
     const gameOverBody = gameIsWon ? (
       <div>
-        <h1>Congrats! You've won! Your score is {score}</h1>
+        <span className="game-over-message">Congrats! You've won! Your score is {score}</span>
         <button onClick={playAgain}>Play again</button>
       </div> 
     ) : (
       <div>
-        <h1>Sorry! Try again! Your score was {score}</h1>
+        <span className="game-over-message">Sorry! Try again! Your score was {score}</span>
         <button onClick={playAgain}>Play again</button>
       </div>
     )
