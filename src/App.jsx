@@ -1,8 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import './App.css'
 
-// assets
-import { cardBack } from './assets/cards'
+import { motion } from 'motion/react'
 
 // utils
 import { shuffleCards } from './utils'
@@ -211,6 +210,7 @@ function App() {
       <Card
         key={card.code}
         rank={card.rank}
+        icon={card.icon}
         suit={card.suit}
         value={card.value}
         image={card.image}
@@ -226,6 +226,7 @@ function App() {
       <div key={card.code} className="monsters">
         <Card
           rank={card.rank}
+          icon={card.icon}
           suit={card.suit}
           value={card.value}
           image={card.image}
@@ -248,15 +249,18 @@ function App() {
       <div className="game-container">
 
         <section className="dungeon-container">
-          <div className="cards-left">
-            <h1 aria-label="Cards left in deck">Cards Left: {shuffledDeck.length}</h1>
+          <div className="game-info-container">
+            <div className="cards-left">
+              <span className="game-info" aria-label="Cards left in deck">Cards Left: {shuffledDeck.length}</span>
+              </div>
+            <div className="health">
+              <span className="game-info">❤️ {currentHealth < 0 ? 0 : currentHealth}</span>
             </div>
-          <div className="health">
-            <h1>❤️ {currentHealth < 0 ? 0 : currentHealth}</h1>
           </div>
             <div className="card-back">SCOUNDREL</div>
-
-            {currentRoomElements}
+            <div className="room">
+              {currentRoomElements}
+            </div>
           <div className="card-back discard">SCOUNDREL</div>
         </section>
 
@@ -265,40 +269,30 @@ function App() {
             <div className="weapon">
               <Card
                 rank={currentWeapon.rank}
+                icon={currentWeapon.icon}
                 suit={currentWeapon.suit}
                 value={currentWeapon.value}
                 image={currentWeapon.image}
                 type={currentWeapon.type}
                 handleClick={null}
               />
-            </div> : null
+            </div> : <div className="empty-weapon"> </div>
           }
           {currentMonsters.length > 0 ?
               currentMonsterElements : null
           }
-          <button 
+          <motion.button
+            whileHover={{y: canRun? -5 : 0}}
+            whileFocus={{y: canRun? -5 : 0}}
             className="run-button"
             disabled={canRun ? false : true}
             aria-disabled={canRun ? false : true}
             onClick={runFromRoom}
           >
             Run
-          </button>
+          </motion.button>
         </section>
       </div>
-
-      {/* <button className="test-card-button">
-        <div className="test-card">
-          <span className="test-value">6</span>
-          <div className="test-name">Monster</div>
-          <div className="test-spade-1"></div>
-          <img className="test-img" src="/images/werewolf.jpg" alt="6 of spades" />
-          <div className="test-card-class">Werewolf</div>
-          <div className="test-spade-2"></div>
-          <div className="test-type">Attack</div>
-          <div className="test-upside-down-value">6</div>
-        </div>
-      </button> */}
     </>
   )
 }
