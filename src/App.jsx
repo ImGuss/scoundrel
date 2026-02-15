@@ -40,12 +40,18 @@ function App() {
   const currentWeaponExists = Object.keys(currentWeapon).length > 0 ? true : false
   const deckIsEmpty = shuffledDeck.length === 0 ? true : false
   const roomIsEmpty = roomCards.length === 0 ? true : false
+  const totalCardsLeft =
+    currentWeaponExists ?
+    shuffledDeck.length + roomCards.length + currentMonsters.length + 1 :
+    shuffledDeck.length + roomCards.length + currentMonsters.length
+  const discardIsEmpty = totalCardsLeft < 44 ? false : true
   const gameIsLost = currentHealth <= 0 ? true : false
   const gameIsWon =
     !gameIsLost && deckIsEmpty && roomIsEmpty ||
     !gameIsLost && deckIsEmpty && roomCards.every(card => card.suit === "Hearts") ?
     true : false
 
+console.log(totalCardsLeft)
 
   if (canRun && deckIsEmpty) setCanRun(false)
 
@@ -257,11 +263,15 @@ function App() {
               <span className="game-info">❤️ {currentHealth < 0 ? 0 : currentHealth}</span>
             </div>
           </div>
-            <div className="card-back">SCOUNDREL</div>
+            { deckIsEmpty ? <div className="empty-pile">EMPTY</div> :
+              <div className="card-back">SCOUNDREL</div>
+            }
             <div className="room">
               {currentRoomElements}
             </div>
-          <div className="card-back discard">SCOUNDREL</div>
+          { discardIsEmpty ? <div className="empty-pile discard">EMPTY</div> :
+            <div className="card-back discard">SCOUNDREL</div>
+          }
         </section>
 
         <section className="battle-container">
