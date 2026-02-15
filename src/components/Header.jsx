@@ -1,3 +1,5 @@
+import { motion } from "motion/react"
+
 export default function Header(props) {
   const { toggleModal } = props
 
@@ -29,8 +31,21 @@ export default function Header(props) {
     <header>
       <h1>Scoundrel</h1>
       <nav className="navbar">
-        <button onClick={() => toggleModal(settings)}><h1>⚙</h1></button>
-        <button onClick={() => toggleModal(rules)}><h1>?</h1></button>
+        <motion.button
+          whileHover={{y:-5}}
+          whileFocus={{y:-5}}
+          onClick={() => toggleModal(settings)}
+        >
+          <span>⚙</span>
+        </motion.button>
+        
+        <motion.button
+          whileHover={{y:-5}}
+          whileFocus={{y:-5}}
+        onClick={() => toggleModal(rules)}
+        >
+          <span>?</span>
+        </motion.button>
       </nav>
     </header>
   )

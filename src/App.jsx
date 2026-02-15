@@ -51,8 +51,6 @@ function App() {
     !gameIsLost && deckIsEmpty && roomCards.every(card => card.suit === "Hearts") ?
     true : false
 
-console.log(totalCardsLeft)
-
   if (canRun && deckIsEmpty) setCanRun(false)
 
   if (!deckIsEmpty && roomCards.length === 1) {
@@ -263,13 +261,13 @@ console.log(totalCardsLeft)
               <span className="game-info">❤️ {currentHealth < 0 ? 0 : currentHealth}</span>
             </div>
           </div>
-            { deckIsEmpty ? <div className="empty-pile">EMPTY</div> :
+            { deckIsEmpty ? <div className="empty-pile">DECK</div> :
               <div className="card-back">SCOUNDREL</div>
             }
             <div className="room">
               {currentRoomElements}
             </div>
-          { discardIsEmpty ? <div className="empty-pile discard">EMPTY</div> :
+          { discardIsEmpty ? <div className="empty-pile discard">DISCARD</div> :
             <div className="card-back discard">SCOUNDREL</div>
           }
         </section>
@@ -286,11 +284,14 @@ console.log(totalCardsLeft)
                 type={currentWeapon.type}
                 handleClick={null}
               />
-            </div> : <div className="empty-weapon"> </div>
+            </div> : <div className="empty-pile empty-weapon">WEAPON</div>
           }
-          {currentMonsters.length > 0 ?
-              currentMonsterElements : null
-          }
+          <div className="monsters-container empty-pile">
+            {currentMonsters.length > 0 ?
+              currentMonsterElements :
+              <div className="empty-pile empty-monsters">MONSTERS</div>
+            }
+          </div>
           <motion.button
             whileHover={{y: canRun? -5 : 0}}
             whileFocus={{y: canRun? -5 : 0}}
