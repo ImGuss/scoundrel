@@ -8,6 +8,7 @@ import { shuffleCards } from './utils'
 
 // components
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Card from './components/Card'
 import Modal from './components/Modal'
 
@@ -304,6 +305,7 @@ function App() {
           </motion.button>
         </section>
       </div>
+      <Footer />
     </>
   )
 }
