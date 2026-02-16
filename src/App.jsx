@@ -277,10 +277,22 @@ function App() {
         <section className="dungeon-container">
           <div className="game-info-container">
             <div className="cards-left">
-              <span className="game-info" aria-label="Cards left in deck">Cards Left: {shuffledDeck.length}</span>
+              <span
+                className="game-info"
+                aria-live="polite"
+                aria-label="Cards left in deck"
+              >
+                Cards Left: {shuffledDeck.length}
+              </span>
               </div>
             <div className="health">
-              <span className="game-info">❤️ {currentHealth < 0 ? 0 : currentHealth}</span>
+              <span
+                className="game-info"
+                aria-live="polite"
+                aria-label="Current health"
+              >
+                ❤️ {currentHealth < 0 ? 0 : currentHealth}
+              </span>
             </div>
           </div>
             { deckIsEmpty ? <div className="empty-pile">DECK</div> :
