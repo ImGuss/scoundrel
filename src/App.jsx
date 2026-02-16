@@ -93,7 +93,14 @@ function App() {
     ) : (
       <div>
         <span className="game-over-message">Sorry! Try again! Your score was {score}</span>
-        <button onClick={playAgain}>Play again</button>
+        <motion.button
+          whileHover={{y:-5}}
+          whileFocus={{y:-5}}
+          className="try-again-button"
+          onClick={playAgain}
+        >
+          Play again
+        </motion.button>
       </div>
     )
     if (gameIsWon || gameIsLost) toggleModal(gameOverBody)
@@ -142,8 +149,22 @@ function App() {
   function fistsOrWeapon(card) {
     const body = (
       <div className="weapon-or-fists">
-        <button className="weapon-button" onClick={() => fightWithWeapon(card)}>Weapon</button>
-        <button className="fists-button" onClick={() => fightWithFists(card)}>Fists</button>
+        <motion.button
+          whileHover={{y:-5}}
+          whileFocus={{y:-5}}
+          className="weapon-button"
+          onClick={() => fightWithWeapon(card)}
+        >
+          Weapon
+        </motion.button>
+        <motion.button
+          whileHover={{y:-5}}
+          whileFocus={{y:-5}}
+          className="fists-button"
+          onClick={() => fightWithFists(card)}
+        >
+          Fists
+        </motion.button>
       </div>
     )
     toggleModal(body)
