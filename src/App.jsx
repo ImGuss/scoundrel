@@ -272,72 +272,75 @@ function App() {
       <Modal dialogRef={dialogRef}>
         {modalBody}
       </Modal>
-      <div className="game-container">
+      <main>
 
-        <section className="dungeon-container">
-          <div className="game-info-container">
-            <div className="cards-left">
-              <span
-                className="game-info"
-                aria-live="polite"
-                aria-label="Cards left in deck"
-              >
-                Cards Left: {shuffledDeck.length}
-              </span>
+        <div className="game-container">
+
+          <section className="dungeon-container">
+            <div className="game-info-container">
+              <div className="cards-left">
+                <span
+                  className="game-info"
+                  aria-live="polite"
+                  aria-label="Cards left in deck"
+                >
+                  Cards Left: {shuffledDeck.length}
+                </span>
+                </div>
+              <div className="health">
+                <span
+                  className="game-info"
+                  aria-live="polite"
+                  aria-label="Current health"
+                >
+                  ❤️ {currentHealth < 0 ? 0 : currentHealth}
+                </span>
               </div>
-            <div className="health">
-              <span
-                className="game-info"
-                aria-live="polite"
-                aria-label="Current health"
-              >
-                ❤️ {currentHealth < 0 ? 0 : currentHealth}
-              </span>
             </div>
-          </div>
-            { deckIsEmpty ? <div className="empty-pile">DECK</div> :
-              <div className="card-back">SCOUNDREL</div>
+              { deckIsEmpty ? <div className="empty-pile">DECK</div> :
+                <div className="card-back">SCOUNDREL</div>
+              }
+              <div className="room">
+                {currentRoomElements}
+              </div>
+            { discardIsEmpty ? <div className="empty-pile discard">DISCARD</div> :
+              <div className="card-back discard">SCOUNDREL</div>
             }
-            <div className="room">
-              {currentRoomElements}
-            </div>
-          { discardIsEmpty ? <div className="empty-pile discard">DISCARD</div> :
-            <div className="card-back discard">SCOUNDREL</div>
-          }
-        </section>
+          </section>
 
-        <section className="battle-container">
-          {currentWeaponExists ?
-            <div className="weapon">
-              <Card
-                rank={currentWeapon.rank}
-                icon={currentWeapon.icon}
-                suit={currentWeapon.suit}
-                value={currentWeapon.value}
-                image={currentWeapon.image}
-                type={currentWeapon.type}
-                handleClick={null}
-              />
-            </div> : <div className="empty-pile empty-weapon">WEAPON</div>
-          }
-          <div className="monsters-container empty-pile">
-            {currentMonsters.length > 0 ?
-              currentMonsterElements :
-              <div className="empty-pile empty-monsters">MONSTERS</div>
+          <section className="battle-container">
+            {currentWeaponExists ?
+              <div className="weapon">
+                <Card
+                  rank={currentWeapon.rank}
+                  icon={currentWeapon.icon}
+                  suit={currentWeapon.suit}
+                  value={currentWeapon.value}
+                  image={currentWeapon.image}
+                  type={currentWeapon.type}
+                  handleClick={null}
+                />
+              </div> : <div className="empty-pile empty-weapon">WEAPON</div>
             }
-          </div>
-          <motion.button
-            whileHover={{y: canRun? -5 : 0}}
-            whileFocus={{y: canRun? -5 : 0}}
-            className="run-button"
-            disabled={canRun ? false : true}
-            aria-disabled={canRun ? false : true}
-            onClick={runFromRoom}
-          >
-            Run
-          </motion.button>
-        </section>
-      </div>
+            <div className="monsters-container empty-pile">
+              {currentMonsters.length > 0 ?
+                currentMonsterElements :
+                <div className="empty-pile empty-monsters">MONSTERS</div>
+              }
+            </div>
+            <motion.button
+              whileHover={{y: canRun? -5 : 0}}
+              whileFocus={{y: canRun? -5 : 0}}
+              className="run-button"
+              disabled={canRun ? false : true}
+              aria-disabled={canRun ? false : true}
+              onClick={runFromRoom}
+            >
+              Run
+            </motion.button>
+          </section>
+        </div>
+      </main>
       <Footer />
     </>
   )
