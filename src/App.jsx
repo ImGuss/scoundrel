@@ -329,8 +329,8 @@ function App() {
               }
             </div>
             <motion.button
-              whileHover={{y: canRun? -5 : 0}}
-              whileFocus={{y: canRun? -5 : 0}}
+              whileHover={{y: canRun ? -5 : 0}}
+              whileFocus={{y: canRun ? -5 : 0}}
               className="run-button"
               disabled={canRun ? false : true}
               aria-disabled={canRun ? false : true}

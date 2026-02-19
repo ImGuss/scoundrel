@@ -1,10 +1,16 @@
 * {
   box-sizing: border-box;
+  --white: #F9F4DA;
+  --black: #2C2C2C;
+}
+
+:focus-visible {
+  outline: none;
 }
 
 body {
   background-color: #121212;
-  color: #F9F4DA;
+  color: var(--white);
   font-family: "Cinzel Decorative", serif;
   margin: 0;
   background-color: #141312;
@@ -56,7 +62,7 @@ main {
 }
 
 .navbar > button {
-  color: #F9F4DA;
+  color: var(--white);
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -77,7 +83,7 @@ main {
 }
 
 .black {
-  color: #2C2C2C;
+  color: var(--black);
 }
 
 .game-container {
@@ -177,10 +183,10 @@ main {
   background-image: url('/images/paper-background.jpg');
   font-family: "Cinzel Decorative", serif;
   font-weight: 600;
-  color: #2C2C2C;
+  color: var(--black);
   border-radius: 5px;
 
-  box-shadow: 0px 15px 10px #000
+  box-shadow: 0px 15px 10px #000;
 }
 
 .rank {
@@ -223,7 +229,7 @@ main {
   grid-column: 1 / -1;
   grid-row: 2 / 3;
   background-image: url('/images/black-paper.jpg');
-  color: #F9F4DA;
+  color: var(--white);
   align-self: end;
   border-radius: 0 0 3px 3px;
   text-align: center;
@@ -249,14 +255,14 @@ main {
   transform: rotate(180deg);
   position: relative;
   top: -1.3rem;
-  color: #F9F4DA;
+  color: var(--white);
   font-size: 1.1rem;
   z-index: 1;
 }
 
 .card-back {
   background-image: url('/images/paper-background.jpg');
-  color: #2C2C2C;
+  color: var(--black);
   font-family: "Cinzel Decorative", serif;
   font-weight: 700;
   align-content: center;
@@ -314,7 +320,7 @@ main {
   cursor: not-allowed;
   background-color: #CC0000;
   background-image: url('/images/dark-red-paper.jpg');
-  color: #F9F4DA;
+  color: var(--white);
 }
 /* end battle */
 
@@ -332,6 +338,16 @@ footer > span {
     0 4px 8px rgba(0,0,0,0.8),
     0 -1px 0 rgba(255,255,255,0.15);
 }
+
+footer > span > a {
+  font-family: arial;
+  color: var(--white);
+}
+
+footer > span > a:hover {
+  opacity: 0.7;
+}
+
 /* end footer */
 
 
@@ -342,7 +358,7 @@ footer > span {
   background-color: #272727;
   border-radius: 7px;
   border: none;
-  color: #2C2C2C;
+  color: var(--black);
   position: relative;
   background-image: url('/images/paper-background.jpg');
   background-size: cover;
@@ -361,7 +377,7 @@ footer > span {
   border: none;
   font-size: 1.15rem;
   cursor: pointer;
-  color: #2C2C2C;
+  color: var(--black);
   font-weight: 200;
   font-weight: 400;
 }
@@ -407,7 +423,7 @@ footer > span {
 
 .fists-button {
   background-image: url('/images/dark-red-paper.jpg');
-  color: #F9F4DA;
+  color: var(--white);
   margin-left: 1.2rem;
   cursor: pointer;
   box-shadow: 0 10px 10px #000;
