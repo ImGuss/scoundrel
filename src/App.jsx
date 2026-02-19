@@ -276,35 +276,36 @@ function App() {
 
         <div className="game-container">
 
-          <section className="dungeon-container">
-            <div className="game-info-container">
-              <div className="cards-left">
-                <span
-                  className="game-info"
-                  aria-live="polite"
-                  aria-label="Cards left in deck"
-                >
-                  Cards Left: {shuffledDeck.length}
-                </span>
-                </div>
-              <div className="health">
-                <span
-                  className="game-info"
-                  aria-live="polite"
-                  aria-label="Current health"
-                >
-                  ❤️ {currentHealth < 0 ? 0 : currentHealth}
-                </span>
+          <section className="game-info-container">
+            <div className="cards-left">
+              <span
+                className="game-info"
+                aria-live="polite"
+                aria-label="Cards left in deck"
+              >
+                Cards Left: {shuffledDeck.length}
+              </span>
               </div>
+            <div className="health">
+              <span
+                className="game-info"
+                aria-live="polite"
+                aria-label="Current health"
+              >
+                ❤️ {currentHealth < 0 ? 0 : currentHealth}
+              </span>
             </div>
-              { deckIsEmpty ? <div className="empty-pile">DECK</div> :
-                <div className="card-back">SCOUNDREL</div>
+          </section>
+
+          <section className="dungeon-container">
+              { deckIsEmpty ? <div className="draw empty-pile">DECK</div> :
+                <div className="draw card-back">SCOUNDREL</div>
               }
               <div className="room">
                 {currentRoomElements}
               </div>
-            { discardIsEmpty ? <div className="empty-pile discard">DISCARD</div> :
-              <div className="card-back discard">SCOUNDREL</div>
+            { discardIsEmpty ? <div className="discard empty-pile">DISCARD</div> :
+              <div className="discard card-back">SCOUNDREL</div>
             }
           </section>
 
@@ -325,7 +326,7 @@ function App() {
             <div className="monsters-container empty-pile">
               {currentMonsters.length > 0 ?
                 currentMonsterElements :
-                <div className="empty-pile empty-monsters">MONSTERS</div>
+                <div className="empty-monsters">MONSTERS</div>
               }
             </div>
             <motion.button
