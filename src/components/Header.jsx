@@ -32,6 +32,7 @@ export default function Header(props) {
       <h1>Scoundrel</h1>
       <nav className="navbar">
         <motion.button
+          aria-label="Settings"
           whileHover={{y:-5}}
           whileFocus={{y:-5}}
           onClick={() => toggleModal(settings)}
@@ -40,6 +41,7 @@ export default function Header(props) {
         </motion.button>
         
         <motion.button
+          aria-label="Help"
           whileHover={{y:-5}}
           whileFocus={{y:-5}}
         onClick={() => toggleModal(rules)}
