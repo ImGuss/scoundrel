@@ -1,9 +1,15 @@
-import axe from './images/axe.jpg'
 import potion from './images/potion.jpg'
+
 import werewolf from './images/werewolf.jpg'
+import dragon from './images/dragon.jpg'
+
+import bow from './images/bow.jpg'
+import mace from './images/mace.jpg'
+import axe from './images/axe.jpg'
+import sword from './images/sword.jpg'
 
 export const cards = [
-  {code: "as", image: werewolf, icon: "♠", suit: "Spades", rank: "A", type: "monster", value: 14},
+  {code: "as", image: dragon, icon: "♠", suit: "Spades", rank: "A", type: "monster", value: 14},
   {code: "2s", image: werewolf, icon: "♠", suit: "Spades", rank: "2", type: "monster", value: 2},
   {code: "3s", image: werewolf, icon: "♠", suit: "Spades", rank: "3", type: "monster", value: 3},
   {code: "4s", image: werewolf, icon: "♠", suit: "Spades", rank: "4", type: "monster", value: 4},
@@ -25,16 +31,16 @@ export const cards = [
   {code: "8h", image: potion, icon: "♥", suit: "Hearts", rank: "8", type: "potion", value: 8},
   {code: "9h", image: potion, icon: "♥", suit: "Hearts", rank: "9", type: "potion", value: 9},
   {code: "th", image: potion, icon: "♥", suit: "Hearts", rank: "10", type: "potion", value: 10},
-  {code: "2d", image: axe, icon: "♦", suit: "Diamonds", rank: "2", type: "weapon", value: 2},
-  {code: "3d", image: axe, icon: "♦", suit: "Diamonds", rank: "3", type: "weapon", value: 3},
-  {code: "4d", image: axe, icon: "♦", suit: "Diamonds", rank: "4", type: "weapon", value: 4},
-  {code: "5d", image: axe, icon: "♦", suit: "Diamonds", rank: "5", type: "weapon", value: 5},
-  {code: "6d", image: axe, icon: "♦", suit: "Diamonds", rank: "6", type: "weapon", value: 6},
+  {code: "2d", image: bow, icon: "♦", suit: "Diamonds", rank: "2", type: "weapon", value: 2},
+  {code: "3d", image: bow, icon: "♦", suit: "Diamonds", rank: "3", type: "weapon", value: 3},
+  {code: "4d", image: mace, icon: "♦", suit: "Diamonds", rank: "4", type: "weapon", value: 4},
+  {code: "5d", image: mace, icon: "♦", suit: "Diamonds", rank: "5", type: "weapon", value: 5},
+  {code: "6d", image: mace, icon: "♦", suit: "Diamonds", rank: "6", type: "weapon", value: 6},
   {code: "7d", image: axe, icon: "♦", suit: "Diamonds", rank: "7", type: "weapon", value: 7},
   {code: "8d", image: axe, icon: "♦", suit: "Diamonds", rank: "8", type: "weapon", value: 8},
-  {code: "9d", image: axe, icon: "♦", suit: "Diamonds", rank: "9", type: "weapon", value: 9},
-  {code: "td", image: axe, icon: "♦", suit: "Diamonds", rank: "10", type: "weapon", value: 10},
-  {code: "ac", image: werewolf, icon: "♣", suit: "Clubs", rank: "A", type: "monster", value: 14},
+  {code: "9d", image: sword, icon: "♦", suit: "Diamonds", rank: "9", type: "weapon", value: 9},
+  {code: "td", image: sword, icon: "♦", suit: "Diamonds", rank: "10", type: "weapon", value: 10},
+  {code: "ac", image: dragon, icon: "♣", suit: "Clubs", rank: "A", type: "monster", value: 14},
   {code: "2c", image: werewolf, icon: "♣", suit: "Clubs", rank: "2", type: "monster", value: 2},
   {code: "3c", image: werewolf, icon: "♣", suit: "Clubs", rank: "3", type: "monster", value: 3},
   {code: "4c", image: werewolf, icon: "♣", suit: "Clubs", rank: "4", type: "monster", value: 4},
